@@ -440,6 +440,11 @@ typedef NS_ENUM(NSUInteger, YYAnimatedImageType) {
 - (void)displayLayer:(CALayer *)layer {
     if (_curFrame) {
         layer.contents = (__bridge id)_curFrame.CGImage;
+    } else {
+        // https://github.com/ibireme/YYKit/issues/573
+        if (@available(iOS 14.0, *)) {
+            [super displayLayer:layer];
+        }
     }
 }
 
